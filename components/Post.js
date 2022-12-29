@@ -88,7 +88,7 @@ const Post = ({ posts, post, user }) => {
       try {
         setLiked((prev) => true);
         const res = await fetch(
-          `http://localhost:3000/api/UsersApi/posts/${post._id}?user=${user._id}&&a=like`,
+          `${process.env.HomePage}/api/UsersApi/posts/${post._id}?user=${user._id}&&a=like`,
           {
             method: "PUT",
           }
@@ -101,7 +101,7 @@ const Post = ({ posts, post, user }) => {
       setLiked(false);
       try {
         const res = await fetch(
-          `http://localhost:3000/api/UsersApi/posts/${post._id}?user=${user._id}&&a=unlike`,
+          `${process.env.HomePage}/api/UsersApi/posts/${post._id}?user=${user._id}&&a=unlike`,
           {
             method: "PUT",
           }
