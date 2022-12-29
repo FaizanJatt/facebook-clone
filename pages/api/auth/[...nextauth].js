@@ -8,7 +8,7 @@ import { hash, compare } from "bcryptjs";
 import dbConnect from "../../../utils/dbConnect";
 dbConnect();
 
-const authOptions = {
+export const authOptions = {
   // adapter: MongoDBAdapter(clientPromise),
   providers: [
     CredentialsProvider({
@@ -32,11 +32,14 @@ const authOptions = {
           } else {
             console.log("coorrect pass");
             console.log("returning");
-
+            console.log(result._id);
             return {
-              result,
-              name: result.username,
-              email: result.email,
+              name: result._id,
+              email: {
+                email: result.email,
+                id: result._id,
+              },
+              id: result._id,
             };
           }
         }
@@ -63,26 +66,23 @@ const authOptions = {
   //     }
   //     return token;
   //   },
-  // async jwt({ token, user }) {
-  //   if (user) {
-  //     console.log("user in jwt", user);
-  //     console.log(user.theObj.id, "id in jwt data");
-  //     token.id = user.theObj.id;
-  //     token.name = user.theObj.name;
-  //     token.email = user.theObj.email;
-  //     console.log("token in jwt", token);
-  //   }
-  //   return token;
-  // },
+  //   async jwt({ token, user }) {
+  //     if (user) {
+  //       console.log("user in jwt", user);
+  //       token.id = user.result._id;
+  //       console.log("token in jwt", token);
+  //     }
+  //     console.log(token);
+  //     return token;
+  //   },
   //   session: async ({ session, user, token }) => {
   //     if (session && user && token) {
   //       console.log(token, "token");
   //       console.log(user, "user in session");
-  //       session.id = user.id;
-  //       session.name = user.name;
-  //       session.dataa = user;
-  //       session.email = user.email;
   //       console.log(session, "sess");
+  //       // token.id = session.user.id;
+  //       session.user.id = token.id;
+  //       console.log(session);
   //     }
   //     return session;
   //   },
@@ -94,7 +94,3 @@ const authOptions = {
 };
 
 export default NextAuth(authOptions);
-
-// export const getServerSideProps = (context) => {
-//   console.log(context);
-// };
