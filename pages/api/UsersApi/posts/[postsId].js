@@ -2,7 +2,7 @@ import dbConnect from "../../../../utils/dbConnect";
 import Posts from "../../../../models/Posts";
 
 dbConnect();
-export default async (req, res) => {
+const postsIdApi = async (req, res) => {
   const { method, query } = req;
   console.log(query);
   console.log("method is", method);
@@ -53,3 +53,5 @@ export default async (req, res) => {
     res.status(400).json({ message: "Access Denied" });
   }
 };
+
+export default postsIdApi;

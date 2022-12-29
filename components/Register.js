@@ -147,7 +147,7 @@ export default function Register({ toggleModal }) {
             <h3>Sign up</h3>
             <span onClick={closeModal}>X</span>
           </div>
-          <div>It's easy to get started</div>
+          <div>It&apos;s easy to get started</div>
           <form onSubmit={handleRegisterSubmit} className="register-form">
             <div className="register-name">
               <input

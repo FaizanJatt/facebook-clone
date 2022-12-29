@@ -3,7 +3,7 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import Modal from "react-modal";
 import Register from "../../components/Register";
-const signin = () => {
+const SignIn = () => {
   const router = useRouter();
   //Login States
   const [openRegister, setOpenRegister] = useState(false);
@@ -99,7 +99,7 @@ const signin = () => {
         </div>
         <input className="login--btn" type="submit" value="Login" />
         <div className="login--new">
-          <p className="bottom-text">Don't have an account?</p>
+          <p className="bottom-text">Don&apos;t have an account?</p>
 
           <span onClick={toggleModal} className="bottom-btn">
             Sign up
@@ -111,4 +111,4 @@ const signin = () => {
   );
 };
 
-export default signin;
+export default SignIn;

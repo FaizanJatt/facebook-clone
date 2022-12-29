@@ -51,7 +51,7 @@ export default function Home({ user, posts }) {
                   alt="main-avatarImg"
                 />
                 <p onClick={togglePostModal} className="main-q">
-                  What's on your mind {user.first} ?
+                  What&apos;s on your mind , {user.first} ?
                 </p>
               </div>
               <hr></hr>

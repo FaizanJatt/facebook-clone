@@ -2,7 +2,7 @@ import dbConnect from "../../../../../utils/dbConnect";
 import Comments from "../../../../../models/Comments";
 
 dbConnect();
-export default async (req, res) => {
+const commentsApi = async (req, res) => {
   const { method, query } = req;
   let postId;
   if (query.postId) {
@@ -40,3 +40,5 @@ export default async (req, res) => {
     res.status(400).json({ message: "Access Denied" });
   }
 };
+
+export default commentsApi;

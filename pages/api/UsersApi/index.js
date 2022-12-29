@@ -2,7 +2,7 @@ import dbConnect from "../../../utils/dbConnect";
 import Users from "../../../models/users";
 import { hash } from "bcryptjs";
 dbConnect();
-export default async (req, res) => {
+const UsersApi = async (req, res) => {
   const { method } = req;
   if (method === "GET") {
     try {
@@ -27,3 +27,5 @@ export default async (req, res) => {
     res.status(400).json({ message: "Access Denied" });
   }
 };
+
+export default UsersApi;
