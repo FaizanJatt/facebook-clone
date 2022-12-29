@@ -1,5 +1,5 @@
 import dbConnect from "../../../utils/dbConnect";
-import Users from "../../../models/users";
+import Users from "../../../models/Users";
 import { hash } from "bcryptjs";
 dbConnect();
 const UsersApi = async (req, res) => {
