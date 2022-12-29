@@ -1,5 +1,6 @@
 import Script from "next/script";
 import { useState } from "react";
+import { signOut } from "next-auth/react";
 function Header({ user }) {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const openSettings = (e) => {
@@ -57,7 +58,12 @@ function Header({ user }) {
                 </div>
               </div>
               <hr className="settings-hr"></hr>
-              <div className="settings-logout">
+              <div
+                onClick={() => {
+                  signOut();
+                }}
+                className="settings-logout"
+              >
                 <div className="logo-container">
                   <i className="fa-sharp fa-solid fa-arrow-right-from-bracket"></i>
                 </div>
