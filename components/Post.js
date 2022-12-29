@@ -88,7 +88,7 @@ const Post = ({ posts, post, user }) => {
       try {
         setLiked((prev) => true);
         const res = await fetch(
-          `${process.env.HomePage}/api/UsersApi/posts/${post._id}?user=${user._id}&&a=like`,
+          `${process.env.NEXT_PUBLIC_HomePage}/api/UsersApi/posts/${post._id}?user=${user._id}&&a=like`,
           {
             method: "PUT",
           }
@@ -101,7 +101,7 @@ const Post = ({ posts, post, user }) => {
       setLiked(false);
       try {
         const res = await fetch(
-          `${process.env.HomePage}/api/UsersApi/posts/${post._id}?user=${user._id}&&a=unlike`,
+          `${process.env.NEXT_PUBLIC_HomePage}/api/UsersApi/posts/${post._id}?user=${user._id}&&a=unlike`,
           {
             method: "PUT",
           }
@@ -122,21 +122,71 @@ const Post = ({ posts, post, user }) => {
     const numberOfLikes = post.liked.length;
 
     if (numberOfLikes > 1) {
-      return (
-        <div className="post---likes">
-          <div className="post-likes-comments">
-            <i
-              style={{ color: "blue" }}
-              className="fa-regular fa-thumbs-up"
-            ></i>
-            <p>
-              {likedList[0].first} {likedList[0].last} and
-              {numberOfLikes - 1} others
-            </p>
+      if (!liked) {
+        return (
+          <div className="post---likes">
+            <div className="post-likes-comments">
+              <i
+                style={{ color: "blue" }}
+                className="fa-regular fa-thumbs-up"
+              ></i>
+              <p>
+                {likedList[0].first} {likedList[0].last} and
+                {numberOfLikes - 1} others
+              </p>
+            </div>
+            <p>{commentsNum} comments</p>
           </div>
-          <p>{commentsNum} comments</p>
-        </div>
-      );
+        );
+      } else if (liked) {
+        return (
+          <div className="post---likes">
+            <div className="post-likes-comments">
+              <i
+                style={{ color: "blue" }}
+                className="fa-regular fa-thumbs-up"
+              ></i>
+              <p>
+                You ,{likedList[0].first} {likedList[0].last} and
+                {numberOfLikes - 1} others
+              </p>
+            </div>
+            <p>{commentsNum} comments</p>
+          </div>
+        );
+      }
+    } else if (numberOfLikes === 1 && likedList[0] !== currentUserId) {
+      if (liked) {
+        return (
+          <div className="post---likes">
+            <div className="post-likes-comments">
+              <i
+                style={{ color: "blue" }}
+                className="fa-regular fa-thumbs-up"
+              ></i>
+              <p>
+                You and {likedList[0].first} {likedList[0].last}
+              </p>
+            </div>
+            <p>{commentsNum} comments</p>
+          </div>
+        );
+      } else if (!liked) {
+        return (
+          <div className="post---likes">
+            <div className="post-likes-comments">
+              <i
+                style={{ color: "blue" }}
+                className="fa-regular fa-thumbs-up"
+              ></i>
+              <p>
+                {likedList[0].first} {likedList[0].last}
+              </p>
+            </div>
+            <p>{commentsNum} comments</p>
+          </div>
+        );
+      }
     } else if (likedList[0]) {
       if (likedList[0]._id == currentUserId && !liked) {
         return;

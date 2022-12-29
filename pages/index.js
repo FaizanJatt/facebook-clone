@@ -77,13 +77,18 @@ export async function getServerSideProps(context) {
   );
   if (session) {
     const userId = session.user.email.id;
-    const data = await fetch(`${process.env.HomePage}/api/UsersApi/${userId}`, {
-      method: "GET",
-    });
+    const data = await fetch(
+      `${process.env.NEXT_PUBLIC_HomePage}/api/UsersApi/${userId}`,
+      {
+        method: "GET",
+      }
+    );
     const response = await data.json();
     const res = response.data[0];
 
-    const getPosts = await fetch(`${process.env.HomePage}/api/UsersApi/posts`);
+    const getPosts = await fetch(
+      `${process.env.NEXT_PUBLIC_HomePage}/api/UsersApi/posts`
+    );
     const posts = await getPosts.json();
     const postsData = posts.data;
 
