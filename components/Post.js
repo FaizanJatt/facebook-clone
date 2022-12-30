@@ -82,6 +82,7 @@ const Post = ({ posts, post, user }) => {
     return item._id === user._id;
   });
   let userAlreadyLiked = HasAlreadyLiked[0];
+  console.log(process.env.NEXT_PUBLIC_HomePage);
 
   const handleLikeButton = async (e) => {
     if (!liked) {
