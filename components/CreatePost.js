@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 export default function CreatePost({ togglePostModal, user }) {
   const [modalIsOpen, setIsOpen] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   ///Register states
 
@@ -45,6 +46,7 @@ export default function CreatePost({ togglePostModal, user }) {
     });
   };
   const handlePostSubmit = async (e) => {
+    setIsLoading(true);
     //validate information before submitting
     e.preventDefault();
     createPost();
@@ -79,9 +81,10 @@ export default function CreatePost({ togglePostModal, user }) {
         },
         body: JSON.stringify(post),
       });
-
+      setIsLoading(false);
       router.reload();
     } catch (error) {
+      setIsLoading(false);
       console.log(error);
     }
   };
@@ -118,6 +121,10 @@ export default function CreatePost({ togglePostModal, user }) {
         style={customStyles}
         // onRequestClose={closeModal}
       >
+        <i
+          style={!isLoading ? { display: "none" } : undefined}
+          className="fa-solid fa-spinner"
+        ></i>
         <div className="modal postmodal">
           <div className="post--top">
             <p className="post-title">Create a Post</p>

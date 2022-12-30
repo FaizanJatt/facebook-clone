@@ -19,8 +19,6 @@ export default function Home({ user, posts }) {
 
     const height = window.innerHeight;
     setDeviceHeight(height);
-
-    console.log(window.innerWidth);
   }, []);
   const session = useSession();
   const [modalIsOpen, setModalIsOpen] = useState(false);

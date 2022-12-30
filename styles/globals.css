@@ -97,6 +97,28 @@ input {
   border-radius: 6px;
   border-color: white;
 }
+.fa-spinner {
+  position: absolute;
+  top: 47%;
+  left: 47%;
+  font-size: 50px;
+  color: #1f75c7;
+  animation-name: loading;
+  animation-delay: 100ms;
+  animation-direction: normal;
+  animation-fill-mode: both;
+  animation-play-state: running;
+  animation-iteration-count: infinite;
+  animation-duration: 1s;
+}
+@keyframes loading {
+  0% {
+    transform: rotateZ(360deg);
+  }
+  100% {
+    transform: rotateZ(0deg);
+  }
+}
 
 .register--top {
   display: flex;

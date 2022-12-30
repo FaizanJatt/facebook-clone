@@ -42,6 +42,7 @@ export default function Register({ toggleModal }) {
   };
   const handleRegisterSubmit = async (e) => {
     //validate information before submitting
+    setIsLoading(true);
     e.preventDefault();
     const keysOfRegisterInfo = Object.keys(registerInfo);
     const errs = [];
@@ -60,12 +61,13 @@ export default function Register({ toggleModal }) {
     if (Object.keys(errs).length === 0) {
       RegisterUser();
     } else {
+      setIsLoading(false);
       return;
     }
   };
   const RegisterUser = async () => {
     console.log("entering registration");
-    setIsLoading(true);
+    // setIsLoading(true);
     try {
       const res = await fetch("/api/UsersApi", {
         method: "POST",
@@ -78,6 +80,7 @@ export default function Register({ toggleModal }) {
       setIsLoading(false);
       router.push(`/`);
     } catch (error) {
+      setIsLoading(false);
       console.log(error);
     }
   };
@@ -145,6 +148,10 @@ export default function Register({ toggleModal }) {
         style={customStyles}
         // onRequestClose={closeModal}
       >
+        <i
+          style={!isLoading ? { display: "none" } : undefined}
+          className="fa-solid fa-spinner"
+        ></i>
         <div className="modal">
           <div className="register--top">
             <h3>Sign up</h3>
@@ -166,6 +173,7 @@ export default function Register({ toggleModal }) {
                 onChange={handleRegisterChange}
                 name="first"
               />
+
               <input
                 className={
                   registerInfoErrorsList.last

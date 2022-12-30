@@ -7,7 +7,6 @@ import monthsArray from "../utils/monthsArray";
 import CreateComment from "../components/CreateComment";
 import Post from "./Post";
 const Posts = ({ posts, user }) => {
-  console.log(posts);
   return (
     <div className="posts-container">
       {posts &&
