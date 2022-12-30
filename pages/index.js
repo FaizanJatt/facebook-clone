@@ -11,6 +11,17 @@ import monthsArray from "../utils/monthsArray";
 import CreateComment from "../components/CreateComment";
 import Posts from "../components/Posts";
 export default function Home({ user, posts }) {
+  const [deviceWidth, setDeviceWidth] = useState("");
+  const [deviceHeight, setDeviceHeight] = useState("");
+  useEffect(() => {
+    const width = window.innerWidth;
+    setDeviceWidth(width);
+
+    const height = window.innerHeight;
+    setDeviceHeight(height);
+
+    console.log(window.innerWidth);
+  }, []);
   const session = useSession();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const togglePostModal = () => {
@@ -29,9 +40,7 @@ export default function Home({ user, posts }) {
     return (
       <div
         className="homepage"
-        style={
-          posts && posts.length > 2 ? { height: "fit-content" } : undefined
-        }
+        // style={{ width: deviceWidth, height: deviceHeight }}
       >
         <Head>
           <title>Facebook clone</title>

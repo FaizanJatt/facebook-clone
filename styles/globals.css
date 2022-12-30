@@ -4,6 +4,11 @@
   font-family: Helvetica;
   box-sizing: border-box;
 }
+
+body {
+  width: 100%;
+}
+
 @font-face {
   font-family: montserra;
   src: url("../fonts/Montserrat-VariableFont_wght.ttf");
@@ -224,7 +229,7 @@ input {
 }
 .homepage {
   background-color: #f0f2f5;
-  height: 100vh;
+  /* height: 100vh; */
 }
 .main-top {
   display: flex;
@@ -556,5 +561,20 @@ hr {
   }
   .top--h1 {
     font-size: 40px;
+  }
+}
+
+@media (max-width: 440px) {
+  .top--h1 {
+    font-size: 24px;
+  }
+  .top--description {
+    font-size: 20px;
+  }
+  .form {
+    min-width: 380px;
+  }
+  .sidebar {
+    display: none;
   }
 }
