@@ -27,6 +27,7 @@ export default function Register({ toggleModal }) {
     female: false,
     other: false,
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   //Registration Logic
 
@@ -64,6 +65,7 @@ export default function Register({ toggleModal }) {
   };
   const RegisterUser = async () => {
     console.log("entering registration");
+    setIsLoading(true);
     try {
       const res = await fetch("/api/UsersApi", {
         method: "POST",
@@ -73,6 +75,7 @@ export default function Register({ toggleModal }) {
         },
         body: JSON.stringify(registerInfo),
       });
+      setIsLoading(false);
       router.push(`/`);
     } catch (error) {
       console.log(error);
@@ -148,6 +151,7 @@ export default function Register({ toggleModal }) {
             <span onClick={closeModal}>X</span>
           </div>
           <div>It&apos;s easy to get started</div>
+
           <form onSubmit={handleRegisterSubmit} className="register-form">
             <div className="register-name">
               <input
@@ -243,7 +247,9 @@ export default function Register({ toggleModal }) {
               </div>
             </div>
             <div className="register-btn-container">
-              <input className="register--btn" type="submit" value="Sign Up" />
+              <button className="register--btn" type="submit" value="Sign Up">
+                Sign Up
+              </button>
             </div>
           </form>
         </div>

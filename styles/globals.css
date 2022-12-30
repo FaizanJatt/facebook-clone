@@ -63,6 +63,9 @@ a {
 .top--description {
   font-size: 18px;
 }
+.register--btn {
+  border: none;
+}
 .bottom-btn {
   color: white;
   background-color: #24b124;
