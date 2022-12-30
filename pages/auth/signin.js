@@ -97,7 +97,9 @@ const SignIn = () => {
             }
           />
         </div>
-        <input className="login--btn" type="submit" value="Login" />
+        <button className="login--btn" type="submit" value="Login">
+          Login
+        </button>
         <div className="login--new">
           <p className="bottom-text">Don&apos;t have an account?</p>
 
