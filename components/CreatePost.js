@@ -111,7 +111,9 @@ export default function CreatePost({ togglePostModal, user }) {
             </div>
           </div>
           <div className="post--mid">
-            <img src={user.avatarImg} className="post-img" />
+            <div className="post-img-container">
+              <img src={user.avatarImg} className="post-img" />
+            </div>
             <div className="mid--intersection">
               <p>{user.first}</p>
               <div className="post-select-container">

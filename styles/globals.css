@@ -780,6 +780,14 @@ hr {
 .sidebar {
   margin-top: 48px;
 }
+.post-img-container {
+  width: 50px;
+  height: 50px;
+}
+.post-img {
+  width: inherit;
+  height: inherit;
+}
 
 @media (max-width: 800px) {
   .profile-cover {

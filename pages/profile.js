@@ -413,6 +413,9 @@ export const getServerSideProps = async (context) => {
       },
     };
   } else {
+    if (!session) {
+      router.push("/");
+    }
     return {
       props: {
         user: "guest",
