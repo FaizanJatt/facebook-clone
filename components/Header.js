@@ -1,6 +1,7 @@
 import Script from "next/script";
 import { useState } from "react";
 import { signOut } from "next-auth/react";
+import Link from "next/link";
 function Header({ user }) {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const openSettings = (e) => {
@@ -16,18 +17,25 @@ function Header({ user }) {
           <div className="logo-container">
             <i className="fa-solid fa-magnifying-glass "></i>
           </div>
+          <Link href="/">
+            <div className="logo-container">
+              <i className="fa-solid fa-house"></i>
+            </div>
+          </Link>
         </div>
         <div className="header-right">
-          <div className="logo-container header-user">
-            <img
-              className="currentUser-img"
-              src={user.avatarImg}
-              alt="currentUserImg"
-            />
-            <p className="header-user-name" style={{ fontWeight: "bold" }}>
-              {user.first}
-            </p>
-          </div>
+          <Link href="/profile">
+            <div className="logo-container header-user">
+              <img
+                className="currentUser-img"
+                src={user.avatarImg}
+                alt="currentUserImg"
+              />
+              <p className="header-user-name" style={{ fontWeight: "bold" }}>
+                {user.first}
+              </p>
+            </div>
+          </Link>
 
           <div className="logo-container">
             <i className="fa-solid fa-bell"></i>
@@ -50,12 +58,14 @@ function Header({ user }) {
                   src={user.avatarImg}
                   alt="userImg"
                 />
-                <div className="settings-profile">
-                  <p className="settings-self-name">
-                    {user.first} {user.last}
-                  </p>
-                  <p className="settings-profile-link">See your Profile</p>
-                </div>
+                <Link href="/profile">
+                  <div className="settings-profile">
+                    <p className="settings-self-name">
+                      {user.first} {user.last}
+                    </p>
+                    <p className="settings-profile-link">See your Profile</p>
+                  </div>
+                </Link>
               </div>
               <hr className="settings-hr"></hr>
               <div

@@ -19,6 +19,7 @@
     "next": "13.0.7",
     "next-auth": "^4.18.6",
     "react": "18.2.0",
+    "react-cropper": "^2.1.8",
     "react-dom": "18.2.0",
     "react-modal": "^3.16.1"
   }

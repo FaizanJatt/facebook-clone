@@ -67,7 +67,7 @@ export default function Register({ toggleModal }) {
   };
   const RegisterUser = async () => {
     console.log("entering registration");
-    // setIsLoading(true);
+
     try {
       const res = await fetch("/api/UsersApi", {
         method: "POST",
@@ -102,10 +102,6 @@ export default function Register({ toggleModal }) {
     toggleModal();
   }
   Modal.setAppElement("#__next");
-  //   const openModal = (e) => {
-  //     e.preventDefault();
-  //     setIsOpen(true);
-  //   };
   const checkHandler = (e) => {
     if (e.target.checked === true) {
       const Selected = e.target.dataset.gender;
@@ -142,12 +138,7 @@ export default function Register({ toggleModal }) {
   };
   return (
     <>
-      <Modal
-        isOpen={modalIsOpen}
-        contentLabel="example"
-        style={customStyles}
-        // onRequestClose={closeModal}
-      >
+      <Modal isOpen={modalIsOpen} contentLabel="example" style={customStyles}>
         <i
           style={!isLoading ? { display: "none" } : undefined}
           className="fa-solid fa-spinner"
@@ -245,7 +236,6 @@ export default function Register({ toggleModal }) {
               <div className="gender--option other">
                 <p>Other</p>
                 <input
-                  // className={registerInfoErrorsList.first && "reg-err"}
                   onChange={checkHandler}
                   type="checkbox"
                   name="dob"

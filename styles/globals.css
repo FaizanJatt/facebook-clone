@@ -7,8 +7,16 @@
 
 body {
   width: 100%;
+  background-color: #f0f2f5;
 }
 
+a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+.fa-house ::before {
+  color: black;
+}
 @font-face {
   font-family: montserra;
   src: url("../fonts/Montserrat-VariableFont_wght.ttf");
@@ -230,7 +238,7 @@ input {
 }
 
 .fa-house {
-  color: #0095ff;
+  color: black;
 }
 .sidebar-item {
   display: flex;
@@ -575,6 +583,164 @@ hr {
 .fa-arrow-right-from-bracket {
   font-size: 18px;
 }
+.profile {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+.profile-cover {
+  aspect-ratio: 16/9;
+}
+.profile-cover-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+}
+.profile-cover-img-container {
+  padding: 0 10%;
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+  aspect-ratio: 16/9;
+}
+
+.profile {
+  position: absolute;
+  top: 48px;
+  z-index: -1;
+}
+.fa-camera-cover {
+  font-size: 18px;
+}
+.fa-camera-container {
+  background-color: white;
+  border-radius: 8px;
+  width: 30px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 22px;
+  bottom: 33%;
+  left: 80%;
+  z-index: 1;
+}
+.pfp-mid {
+  display: flex;
+  flex-direction: column;
+  display: Flex;
+  align-items: center;
+}
+
+.profile-cover {
+  position: absolute;
+}
+.profile-top {
+  display: flex;
+  justify-content: center;
+}
+.header {
+  position: fixed;
+  width: 100%;
+}
+
+.profile---mid {
+  display: Flex;
+  align-items: center;
+}
+
+.self-name {
+  font-weight: bold;
+  font-size: 35px;
+  font-family: Helvetica;
+  font-family: "montserra";
+}
+.self > * {
+  font-family: "montserra";
+}
+.pfp-camera-container {
+  background-color: white;
+  border-radius: 25px;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  right: 14%;
+  justify-content: center;
+  top: 38px;
+}
+.fa-camera-container:hover {
+  background-color: #c9c9c9;
+}
+
+.self {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 10px;
+  margin-top: 25px;
+}
+.cutline {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+  top: 109px;
+  flex-direction: column;
+}
+
+.profile-nav-item {
+  display: block;
+}
+.profile-cover-img {
+  object-fit: cover;
+}
+
+.coverErr {
+  background-color: #424cb5;
+  position: relative;
+  padding: 3px;
+  bottom: 25%;
+  width: fit-content;
+  font-family: "montsera";
+  color: white;
+  font-weight: bold;
+}
+
+.profile-cover {
+  height: 400px;
+  width: 100%;
+}
+.profile-cover-img-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.profile-user-img-container {
+  border-radius: 89px;
+  width: 150px;
+  height: 150px;
+}
+.profile-user-img {
+  border-radius: inherit;
+  width: inherit;
+  height: inherit;
+  border: 4px solid white;
+  object-fit: cover;
+}
+.profile-nav {
+  display: flex;
+  padding: 2px 30px;
+  justify-content: flex-start;
+  gap: 10px;
+}
+.camera-profilepic {
+  font-size: 24px;
+}
+.pfp-camera-container:hover {
+  background-color: #c9c9c9;
+}
 @media (max-width: 900px) {
   .form-container {
     flex-direction: column;
@@ -603,4 +769,47 @@ hr {
   .sidebar {
     display: none;
   }
+}
+
+@media (max-width: 800px) {
+  .profile-cover {
+    height: 25%;
+  }
+  .cutline {
+    display: none;
+  }
+}
+
+.profile-cover-img-container {
+  padding: 0;
+  border-radius: 0;
+}
+.profile-cover-img {
+  padding: 0;
+  border-radius: 0;
+}
+.profile-cover {
+  height: 50%;
+}
+.pfp-mid {
+  position: relative;
+  top: -54%;
+}
+
+.pfp-camera-container {
+  right: -31%;
+  top: -52px;
+}
+.profile---mid {
+  flex-direction: column;
+}
+.profile-user-img-container {
+  width: 200px;
+  height: 200px;
+  border-radius: 99px;
+}
+.self {
+  margin: 0;
+  padding: 0;
+  margin-top: -20%;
 }

@@ -96,7 +96,6 @@ const Post = ({ posts, post, user }) => {
         console.log(error, "error occursed");
       }
     } else {
-      //   userAlreadyLiked = undefined;
       setLiked(false);
       try {
         const res = await fetch(
@@ -105,8 +104,6 @@ const Post = ({ posts, post, user }) => {
             method: "PUT",
           }
         );
-
-        // userAlreadyLiked = undefined;
       } catch (error) {
         console.log(error);
       }

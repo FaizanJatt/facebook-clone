@@ -50,25 +50,6 @@ export default function CreatePost({ togglePostModal, user }) {
     //validate information before submitting
     e.preventDefault();
     createPost();
-    //     const keysOfRegisterInfo = Object.keys(registerInfo);
-    //     const errs = [];
-
-    //     keysOfRegisterInfo.forEach((key) => {
-    //       if (!registerInfo[key]) errs.push(key);
-    //     });
-    //     errs.forEach((error) => {
-    //       setRegisterInfoErrorsList((prev) => {
-    //         return {
-    //           ...prev,
-    //           [error]: true,
-    //         };
-    //       });
-    //     });
-    //     if (Object.keys(errs).length === 0) {
-    //       RegisterUser();
-    //     } else {
-    //       return;
-    //     }
   };
   const createPost = async () => {
     console.log("creating post");
@@ -115,12 +96,7 @@ export default function CreatePost({ togglePostModal, user }) {
 
   return (
     <>
-      <Modal
-        isOpen={modalIsOpen}
-        contentLabel="example"
-        style={customStyles}
-        // onRequestClose={closeModal}
-      >
+      <Modal isOpen={modalIsOpen} contentLabel="example" style={customStyles}>
         <i
           style={!isLoading ? { display: "none" } : undefined}
           className="fa-solid fa-spinner"

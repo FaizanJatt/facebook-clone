@@ -7,8 +7,6 @@ import { unstable_getServerSession } from "next-auth/next";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import CreatePost from "../components/CreatePost";
-import monthsArray from "../utils/monthsArray";
-import CreateComment from "../components/CreateComment";
 import Posts from "../components/Posts";
 export default function Home({ user, posts }) {
   const [deviceWidth, setDeviceWidth] = useState("");

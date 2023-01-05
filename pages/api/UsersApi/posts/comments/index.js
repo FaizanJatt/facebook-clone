@@ -2,7 +2,7 @@ import dbConnect from "../../../../../utils/dbConnect";
 import Comments from "../../../../../models/Comments";
 
 dbConnect();
-const commentsApi = async (req, res) => {
+const CommentsApi = async (req, res) => {
   const { method, query } = req;
   let postId;
   if (query.postId) {
@@ -41,4 +41,4 @@ const commentsApi = async (req, res) => {
   }
 };
 
-export default commentsApi;
+export default CommentsApi;
