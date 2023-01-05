@@ -11,6 +11,15 @@ import PCropper from "../components/PCropper";
 
 import Header from "../components/Header";
 const Profile = ({ user, posts, currentCover, covers }) => {
+  const session = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!session.data) {
+      router.push("/");
+    }
+  }, [session]);
+
   const [readerCoverImg, setReaderCoverImg] = useState();
   const [readerPfp, setReaderPfp] = useState();
   const [croppedCover, setCroppedCover] = useState();
@@ -19,7 +28,7 @@ const Profile = ({ user, posts, currentCover, covers }) => {
   const [profileModalIsOpen, setProfileModalIsOpen] = useState(false);
   const [errors, SetErrors] = useState({});
   const [file, setFile] = useState();
-  const router = useRouter();
+
   ////////////////////////////////////////////Time LOGIC ///////////////////////////////////////////////////////////////////////////////////////
   const date = new Date(); //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   const hours = date.getHours(); ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -39,7 +48,6 @@ const Profile = ({ user, posts, currentCover, covers }) => {
     user: user._id,
   });
 
-  const session = useSession();
   const inputRef = useRef();
   const coverSubmitRef = useRef();
   const pfpRef = useRef();
@@ -49,7 +57,6 @@ const Profile = ({ user, posts, currentCover, covers }) => {
       if (coverImageChangeEvent.target.value == null) return;
       const reader = new FileReader();
       let image = new Image();
-      console.log("pfp");
       reader.onload = function (readerLoadEvent) {
         image.src = readerLoadEvent.srcElement.result;
         setReaderPfp(readerLoadEvent.srcElement.result);
@@ -59,7 +66,6 @@ const Profile = ({ user, posts, currentCover, covers }) => {
         let height = this.height;
         let width = this.width;
         if (width >= 400 && height >= 150) {
-          console.log("Here");
         } else {
           setReaderPfp(undefined);
           setProfileModalIsOpen(false);
@@ -77,10 +83,8 @@ const Profile = ({ user, posts, currentCover, covers }) => {
       if (coverImageChangeEvent.target.value == null) return;
       const reader = new FileReader();
       let image = new Image();
-      console.log("its cover Img");
+
       reader.onload = function (readerLoadEvent) {
-        console.log(readerLoadEvent);
-        console.log(coverModalIsOpen);
         image.src = readerLoadEvent.srcElement.result;
         setReaderCoverImg(readerLoadEvent.srcElement.result);
         setCoverModalIsOpen(true);
@@ -195,11 +199,10 @@ const Profile = ({ user, posts, currentCover, covers }) => {
       }
     } else if (coverForm.cover) {
       createImg();
-
-      //   router.reload();
+      router.reload();
     }
   }
-  console.log(coverForm);
+
   if (readerPfp) {
     if (!pfpForm.pfp) {
       if (file) {
@@ -210,7 +213,6 @@ const Profile = ({ user, posts, currentCover, covers }) => {
     } else if (pfpForm.pfp) {
       createImg();
       updateUser();
-      console.log("UPDATED");
       router.reload();
     }
   }
@@ -413,12 +415,15 @@ export const getServerSideProps = async (context) => {
       },
     };
   } else {
-    if (!session) {
-      router.push("/");
-    }
     return {
       props: {
-        user: "guest",
+        redirect: {
+          path: "/",
+        },
+        user: {
+          first: "guest",
+          _id: 1,
+        },
       },
     };
   }

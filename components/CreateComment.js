@@ -19,6 +19,7 @@ const CreateComment = ({ user, post, hasListChanged }) => {
     });
   };
   const handleCommentSubmit = (e) => {
+    console.log(e.key);
     if (e.keyCode == 13) {
       if (comment.comment.length !== 0) {
         createComment();
