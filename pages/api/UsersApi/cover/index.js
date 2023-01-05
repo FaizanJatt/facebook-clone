@@ -16,6 +16,7 @@ const CoversApi = async (req, res) => {
     try {
       console.log("POST BODY", req.body);
       const cover = await Covers.create(req.body);
+      console.log(cover);
       res.status(200).json({ data: cover });
     } catch (error) {
       console.log("failed");

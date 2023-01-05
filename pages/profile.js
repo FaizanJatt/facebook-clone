@@ -195,9 +195,11 @@ const Profile = ({ user, posts, currentCover, covers }) => {
       }
     } else if (coverForm.cover) {
       createImg();
-      router.reload();
+
+      //   router.reload();
     }
   }
+  console.log(coverForm);
   if (readerPfp) {
     if (!pfpForm.pfp) {
       if (file) {
@@ -274,7 +276,13 @@ const Profile = ({ user, posts, currentCover, covers }) => {
               <div className="profile-cover-img-container">
                 <img
                   className="profile-cover-img"
-                  src={croppedCover ? croppedCover : currentCover.cover}
+                  src={
+                    croppedCover
+                      ? croppedCover
+                      : currentCover
+                      ? currentCover.cover
+                      : undefined
+                  }
                 />
                 <p
                   style={
@@ -298,7 +306,13 @@ const Profile = ({ user, posts, currentCover, covers }) => {
                   <div className="profile-user-img-container">
                     <img
                       className="profile-user-img"
-                      src={croppedPfp ? croppedPfp : user.avatarImg}
+                      src={
+                        croppedPfp
+                          ? croppedPfp
+                          : user.avatarImg
+                          ? user.avatarImg
+                          : undefined
+                      }
                       alt="userimg"
                     />
                   </div>
@@ -310,7 +324,9 @@ const Profile = ({ user, posts, currentCover, covers }) => {
                   </div>
 
                   <div className="self">
-                    <p className="self-name">Aira Han</p>
+                    <p className="self-name">
+                      {user.first} {user.last}
+                    </p>
                     <p>___ Friends</p>
                     <form ref={coverSubmitRef} onSubmit={handleOnSubmit}>
                       <input
@@ -332,12 +348,6 @@ const Profile = ({ user, posts, currentCover, covers }) => {
                     <div>avatars ofFriends</div>
                   </div>
                 </div>
-                {/* <div className="profile-nav">
-                  <span className="profile-nav-item">Posts</span>
-                  <span className="profile-nav-item">About</span>
-                  <span className="profile-nav-item">Friends</span>
-                  <span className="profile-nav-item">Photos</span>
-                </div> */}
               </div>
               <div className="cutline">
                 <hr></hr>
@@ -385,9 +395,15 @@ export const getServerSideProps = async (context) => {
     const getCovers = await fetch(
       `${process.env.NEXT_PUBLIC_HomePage}/api/UsersApi/cover/${userId}`
     );
-    const covers = await getCovers.json();
-    const coversData = covers.data;
-    const currentCover = coversData[0];
+    let currentCover = "empty";
+    let coversData = "empty";
+    console.log(getCovers);
+    console.log(getCovers !== undefined);
+    if (getCovers !== undefined) {
+      const covers = await getCovers.json();
+      coversData = covers.data;
+      currentCover = coversData[0];
+    }
     return {
       props: {
         user: res,

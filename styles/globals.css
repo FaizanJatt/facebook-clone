@@ -741,44 +741,6 @@ hr {
 .pfp-camera-container:hover {
   background-color: #c9c9c9;
 }
-@media (max-width: 900px) {
-  .form-container {
-    flex-direction: column;
-    justify-content: center;
-    gap: 2rem;
-  }
-  .top--description {
-    font-size: 24px;
-    flex-wrap: nowrap;
-  }
-  .top--h1 {
-    font-size: 40px;
-  }
-}
-
-@media (max-width: 440px) {
-  .top--h1 {
-    font-size: 24px;
-  }
-  .top--description {
-    font-size: 20px;
-  }
-  .form {
-    min-width: 380px;
-  }
-  .sidebar {
-    display: none;
-  }
-}
-
-@media (max-width: 800px) {
-  .profile-cover {
-    height: 25%;
-  }
-  .cutline {
-    display: none;
-  }
-}
 
 .profile-cover-img-container {
   padding: 0;
@@ -812,4 +774,47 @@ hr {
   margin: 0;
   padding: 0;
   margin-top: -20%;
+}
+
+.main,
+.sidebar {
+  margin-top: 48px;
+}
+
+@media (max-width: 800px) {
+  .profile-cover {
+    height: 25%;
+  }
+  .cutline {
+    display: none;
+  }
+}
+@media (max-width: 440px) {
+  .top--h1 {
+    font-size: 24px;
+  }
+  .top--description {
+    font-size: 20px;
+  }
+  .form {
+    min-width: 380px;
+  }
+  .sidebar {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .form-container {
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+  }
+  .top--description {
+    font-size: 24px;
+    flex-wrap: nowrap;
+  }
+  .top--h1 {
+    font-size: 40px;
+  }
 }
