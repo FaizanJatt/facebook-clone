@@ -1,4 +1,3 @@
-import { useSession } from "next-auth/react";
 import { authOptions } from "./api/auth/[...nextauth]";
 import { unstable_getServerSession } from "next-auth/next";
 import { useState, useEffect } from "react";
@@ -11,14 +10,7 @@ import PCropper from "../components/PCropper";
 
 import Header from "../components/Header";
 const Profile = ({ user, posts, currentCover, covers }) => {
-  const session = useSession();
   const router = useRouter();
-
-  // useEffect(() => {
-  //   if (!session.data) {
-  //     router.push("/");
-  //   }
-  // }, [session]);
 
   const [readerCoverImg, setReaderCoverImg] = useState();
   const [readerPfp, setReaderPfp] = useState();
@@ -369,58 +361,52 @@ const Profile = ({ user, posts, currentCover, covers }) => {
 export default Profile;
 
 export const getServerSideProps = async (context) => {
-  const get = await fetch(`${process.env.NEXT_PUBLIC_HomePage}/api/UsersApi`);
+  // const get = await fetch(`${process.env.NEXT_PUBLIC_HomePage}/api/UsersApi`);
   const session = await unstable_getServerSession(
     context.req,
     context.res,
     authOptions
   );
-  if (session) {
-    const userId = session.user.email.id;
-    const data = await fetch(
-      `${process.env.NEXT_PUBLIC_HomePage}/api/UsersApi/${userId}`,
-      {
-        method: "GET",
-      }
-    );
-    const response = await data.json();
-    const res = response.data[0];
-
-    const getPosts = await fetch(
-      `${process.env.NEXT_PUBLIC_HomePage}/api/UsersApi/posts`
-    );
-    const posts = await getPosts.json();
-    const postsData = posts.data;
-
-    const getCovers = await fetch(
-      `${process.env.NEXT_PUBLIC_HomePage}/api/UsersApi/cover/${userId}`
-    );
-    let currentCover = "empty";
-    let coversData = "empty";
-    if (getCovers !== undefined) {
-      const covers = await getCovers.json();
-      coversData = covers.data;
-      currentCover = coversData[0];
-    }
+  if (!session) {
     return {
-      props: {
-        user: res,
-        posts: postsData,
-        currentCover: currentCover || null,
-        covers: coversData,
-      },
-    };
-  } else {
-    return {
-      props: {
-        redirect: {
-          path: "/",
-        },
-        user: {
-          first: "guest",
-          _id: 1,
-        },
+      redirect: {
+        destination: "/auth/signin",
+        permanent: false,
       },
     };
   }
+  const userId = session.user.email.id;
+  const data = await fetch(
+    `${process.env.NEXT_PUBLIC_HomePage}/api/UsersApi/${userId}`,
+    {
+      method: "GET",
+    }
+  );
+  const response = await data.json();
+  const res = response.data[0];
+
+  const getPosts = await fetch(
+    `${process.env.NEXT_PUBLIC_HomePage}/api/UsersApi/posts`
+  );
+  const posts = await getPosts.json();
+  const postsData = posts.data;
+
+  const getCovers = await fetch(
+    `${process.env.NEXT_PUBLIC_HomePage}/api/UsersApi/cover/${userId}`
+  );
+  let currentCover = "empty";
+  let coversData = "empty";
+  if (getCovers !== undefined) {
+    const covers = await getCovers.json();
+    coversData = covers.data;
+    currentCover = coversData[0];
+  }
+  return {
+    props: {
+      user: res,
+      posts: postsData,
+      currentCover: currentCover || null,
+      covers: coversData,
+    },
+  };
 };
