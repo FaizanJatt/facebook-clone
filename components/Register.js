@@ -66,8 +66,6 @@ export default function Register({ toggleModal }) {
     }
   };
   const RegisterUser = async () => {
-    console.log("entering registration");
-
     try {
       const res = await fetch("/api/UsersApi", {
         method: "POST",

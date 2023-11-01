@@ -19,7 +19,6 @@ const CreateComment = ({ user, post, hasListChanged }) => {
     });
   };
   const handleCommentSubmit = (e) => {
-    console.log(e.key);
     if (e.keyCode == 13) {
       if (comment.comment.length !== 0) {
         createComment();
@@ -27,7 +26,6 @@ const CreateComment = ({ user, post, hasListChanged }) => {
     }
   };
   const createComment = async () => {
-    console.log("creating comment");
     try {
       const res = await fetch("/api/UsersApi/posts/comments", {
         method: "POST",

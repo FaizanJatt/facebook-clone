@@ -7,7 +7,6 @@ function Header({ user }) {
   const openSettings = (e) => {
     setIsSettingsOpen((prev) => !prev);
   };
-  console.log(isSettingsOpen);
   return (
     <>
       <Script src="https://kit.fontawesome.com/ad91fb5d97.js" />

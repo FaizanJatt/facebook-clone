@@ -4,6 +4,8 @@ import mongoose, { Schema, model, models } from "mongoose";
 const ProfileSchema = new Schema({
   cover: {
     type: String,
+    default:
+      "https://res.cloudinary.com/dguei52eb/image/upload/v1698829205/pfp_lxjws1.png",
   },
   postDate: {
     type: Date,

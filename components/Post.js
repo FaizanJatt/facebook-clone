@@ -93,7 +93,7 @@ const Post = ({ posts, post, user }) => {
           }
         );
       } catch (error) {
-        console.log(error, "error occursed");
+        console.log(error, "error occurred");
       }
     } else {
       setLiked(false);

@@ -237,11 +237,9 @@ const Profile = ({ user, posts, currentCover, covers }) => {
     },
   };
   function closeCoverModal() {
-    console.log("closing");
     setCoverModalIsOpen(false);
   }
   function closePfpModal() {
-    console.log("closing");
     setProfileModalIsOpen(false);
   }
   Modal.setAppElement("#__next");
@@ -283,7 +281,7 @@ const Profile = ({ user, posts, currentCover, covers }) => {
                       ? croppedCover
                       : currentCover
                       ? currentCover.cover
-                      : undefined
+                      : null
                   }
                 />
                 <p
@@ -399,8 +397,6 @@ export const getServerSideProps = async (context) => {
     );
     let currentCover = "empty";
     let coversData = "empty";
-    console.log(getCovers);
-    console.log(getCovers !== undefined);
     if (getCovers !== undefined) {
       const covers = await getCovers.json();
       coversData = covers.data;
@@ -410,7 +406,7 @@ export const getServerSideProps = async (context) => {
       props: {
         user: res,
         posts: postsData,
-        currentCover,
+        currentCover: currentCover || null,
         covers: coversData,
       },
     };

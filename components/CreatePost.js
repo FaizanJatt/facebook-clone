@@ -52,7 +52,6 @@ export default function CreatePost({ togglePostModal, user }) {
     createPost();
   };
   const createPost = async () => {
-    console.log("creating post");
     try {
       const res = await fetch("/api/UsersApi/posts", {
         method: "POST",

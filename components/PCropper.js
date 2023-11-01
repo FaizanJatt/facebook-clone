@@ -4,7 +4,6 @@ import "cropperjs/dist/cropper.css";
 import Modal from "react-modal";
 
 const CCropper = ({ src, getImg, closeModal }) => {
-  //   console.log(src);
   const cropperRef = useRef(null);
 
   const onCrop = () => {};
