@@ -14,11 +14,11 @@ const Profile = ({ user, posts, currentCover, covers }) => {
   const session = useSession();
   const router = useRouter();
 
-  useEffect(() => {
-    if (!session.data) {
-      router.push("/");
-    }
-  }, [session]);
+  // useEffect(() => {
+  //   if (!session.data) {
+  //     router.push("/");
+  //   }
+  // }, [session]);
 
   const [readerCoverImg, setReaderCoverImg] = useState();
   const [readerPfp, setReaderPfp] = useState();
