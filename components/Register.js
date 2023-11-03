@@ -41,7 +41,19 @@ export default function Register({ toggleModal }) {
     });
   };
   const handleRegisterSubmit = async (e) => {
-    //validate information before submitting
+    let currYear = new Date().getFullYear();
+    let registeredYear = new Date(registerInfo.dob).getFullYear();
+    let isAdult = currYear - registeredYear > 8 ? true : false;
+    if (!isAdult) {
+      e.preventDefault();
+      setRegisterInfoErrorsList((prev) => {
+        return {
+          ...prev,
+          dob: true,
+        };
+      });
+      return;
+    }
     setIsLoading(true);
     e.preventDefault();
     const keysOfRegisterInfo = Object.keys(registerInfo);
@@ -216,7 +228,8 @@ export default function Register({ toggleModal }) {
                 <input
                   onChange={checkHandler}
                   type="checkbox"
-                  name="dob"
+                  // name="dob"
+                  name="gender"
                   data-gender="male"
                   disabled={isOptionDisabled.male}
                 />
@@ -226,7 +239,8 @@ export default function Register({ toggleModal }) {
                 <input
                   onChange={checkHandler}
                   type="checkbox"
-                  name="dob"
+                  name="gender"
+                  // name="dob"
                   data-gender="female"
                   disabled={isOptionDisabled.female}
                 />
@@ -236,7 +250,8 @@ export default function Register({ toggleModal }) {
                 <input
                   onChange={checkHandler}
                   type="checkbox"
-                  name="dob"
+                  // name="dob"
+                  name="gender"
                   data-gender="other"
                   disabled={isOptionDisabled.other}
                 />

@@ -9,15 +9,15 @@ import Sidebar from "../components/Sidebar";
 import CreatePost from "../components/CreatePost";
 import Posts from "../components/Posts";
 export default function Home({ user, posts }) {
-  const [deviceWidth, setDeviceWidth] = useState("");
-  const [deviceHeight, setDeviceHeight] = useState("");
-  useEffect(() => {
-    const width = window.innerWidth;
-    setDeviceWidth(width);
+  // const [deviceWidth, setDeviceWidth] = useState("");
+  // const [deviceHeight, setDeviceHeight] = useState("");
+  // useEffect(() => {
+  //   const width = window.innerWidth;
+  //   setDeviceWidth(width);
 
-    const height = window.innerHeight;
-    setDeviceHeight(height);
-  }, []);
+  //   const height = window.innerHeight;
+  //   setDeviceHeight(height);
+  // }, []);
   const session = useSession();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const togglePostModal = () => {

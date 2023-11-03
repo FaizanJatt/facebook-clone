@@ -1,6 +1,6 @@
 import { authOptions } from "./api/auth/[...nextauth]";
 import { unstable_getServerSession } from "next-auth/next";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import { useRef } from "react";
 import Modal from "react-modal";
 import "cropperjs/dist/cropper.css";
@@ -9,7 +9,26 @@ import { useRouter } from "next/router";
 import PCropper from "../components/PCropper";
 
 import Header from "../components/Header";
+import Posts from "../components/Posts";
+import AboutMe from "../components/AboutMe";
 const Profile = ({ user, posts, currentCover, covers }) => {
+  let userPosts = posts.filter((post) => post.author._id == user._id);
+
+  const [deviceWidth, setDeviceWidth] = useState("");
+  const [deviceHeight, setDeviceHeight] = useState("");
+  useEffect(() => {
+    function resizeHandler() {
+      const width = window.innerWidth;
+      setDeviceWidth(width);
+
+      const height = window.innerHeight;
+      setDeviceHeight(height);
+    }
+    window.addEventListener("resize", resizeHandler);
+  }, [deviceWidth, deviceHeight]);
+
+  console.log(deviceWidth, deviceHeight);
+  let isMobile = deviceWidth > 800 ? true : false;
   const router = useRouter();
 
   const [readerCoverImg, setReaderCoverImg] = useState();
@@ -237,124 +256,129 @@ const Profile = ({ user, posts, currentCover, covers }) => {
   Modal.setAppElement("#__next");
 
   return (
-    <>
-      <div className="profile--main">
-        <Header user={user} />
-        <div className="profile">
-          <Modal
-            isOpen={coverModalIsOpen}
-            contentLabel="example"
-            style={customStyles}
-          >
-            <CCropper
-              closeModal={closeCoverModal}
-              getImg={getCroppedCoverFromCropper}
-              src={readerCoverImg}
-            />
-          </Modal>
-          <Modal
-            isOpen={profileModalIsOpen}
-            contentLabel="k"
-            style={customStyles}
-          >
-            <PCropper
-              closeModal={closePfpModal}
-              getImg={getCroppedPfpFromCropper}
-              src={readerPfp}
-            />
-          </Modal>
-          <div className="profile-top">
-            <div className="profile-cover">
-              <div className="profile-cover-img-container">
-                <img
-                  className="profile-cover-img"
-                  src={
-                    croppedCover
-                      ? croppedCover
-                      : currentCover
-                      ? currentCover.cover
-                      : null
-                  }
-                />
-                <p
-                  style={
-                    errors && errors.coverImgError
-                      ? undefined
-                      : { display: "none" }
-                  }
-                  className="coverErr"
-                >
-                  {errors && errors.coverImgError}
-                </p>
-              </div>
-              <div
-                onClick={() => inputRef.current.click()}
-                className="fa-camera-container"
+    <div className="profile--main">
+      <Header user={user} />
+      <div className="profile">
+        <Modal
+          isOpen={coverModalIsOpen}
+          contentLabel="example"
+          style={customStyles}
+        >
+          <CCropper
+            closeModal={closeCoverModal}
+            getImg={getCroppedCoverFromCropper}
+            src={readerCoverImg}
+          />
+        </Modal>
+        <Modal
+          isOpen={profileModalIsOpen}
+          contentLabel="k"
+          style={customStyles}
+        >
+          <PCropper
+            closeModal={closePfpModal}
+            getImg={getCroppedPfpFromCropper}
+            src={readerPfp}
+          />
+        </Modal>
+        <div className="profile-top">
+          <div className="profile-cover">
+            <div className="profile-cover-img-container">
+              <img
+                className="profile-cover-img"
+                src={
+                  croppedCover
+                    ? croppedCover
+                    : currentCover
+                    ? currentCover.cover
+                    : null
+                }
+              />
+              <p
+                style={
+                  errors && errors.coverImgError
+                    ? undefined
+                    : { display: "none" }
+                }
+                className="coverErr"
               >
-                <i className="fa-solid fa-camera fa-camera-cover"></i>
-              </div>
-              <div className="pfp-mid">
-                <div className="profile---mid">
-                  <div className="profile-user-img-container">
-                    <img
-                      className="profile-user-img"
-                      src={
-                        croppedPfp
-                          ? croppedPfp
-                          : user.avatarImg
-                          ? user.avatarImg
-                          : undefined
-                      }
-                      alt="userimg"
-                    />
-                  </div>
-                  <div
-                    onClick={() => pfpRef.current.click()}
-                    className="pfp-camera-container"
-                  >
-                    <i className="fa-solid fa-camera camera-profilepic"></i>
-                  </div>
+                {errors && errors.coverImgError}
+              </p>
+            </div>
+            <div
+              onClick={() => inputRef.current.click()}
+              className="fa-camera-container"
+            >
+              <i className="fa-solid fa-camera fa-camera-cover"></i>
+            </div>
+            <div className="pfp-mid">
+              <div className="profile---mid">
+                <div className="profile-user-img-container">
+                  <img
+                    className="profile-user-img"
+                    src={
+                      croppedPfp
+                        ? croppedPfp
+                        : user.avatarImg
+                        ? user.avatarImg
+                        : undefined
+                    }
+                    alt="userimg"
+                  />
+                </div>
+                <div
+                  onClick={() => pfpRef.current.click()}
+                  className="pfp-camera-container"
+                >
+                  <i className="fa-solid fa-camera camera-profilepic"></i>
+                </div>
 
-                  <div className="self">
-                    <p className="self-name">
-                      {user.first} {user.last}
-                    </p>
-                    <p>___ Friends</p>
-                    <form ref={coverSubmitRef} onSubmit={handleOnSubmit}>
-                      <input
-                        ref={inputRef}
-                        type="file"
-                        style={{ display: "none" }}
-                        onChange={handleCoverImage}
-                      />
-                    </form>
-                    <form ref={pfpSubmitRef} onSubmit={handleOnSubmit}>
-                      <input
-                        ref={pfpRef}
-                        type="file"
-                        data-attribute="pfp"
-                        style={{ display: "none" }}
-                        onChange={handleCoverImage}
-                      />
-                    </form>
-                    <div>avatars ofFriends</div>
-                  </div>
+                <div className="self">
+                  <p className="self-name">
+                    {user.first} {user.last}
+                  </p>
+                  <p className="friends-count"> 466 friends</p>
+                  <form ref={coverSubmitRef} onSubmit={handleOnSubmit}>
+                    <input
+                      ref={inputRef}
+                      type="file"
+                      style={{ display: "none" }}
+                      onChange={handleCoverImage}
+                    />
+                  </form>
+                  <form ref={pfpSubmitRef} onSubmit={handleOnSubmit}>
+                    <input
+                      ref={pfpRef}
+                      type="file"
+                      data-attribute="pfp"
+                      style={{ display: "none" }}
+                      onChange={handleCoverImage}
+                    />
+                  </form>
                 </div>
               </div>
               <div className="cutline">
                 <hr></hr>
                 <div className="profile-nav">
-                  <span className="profile-nav-item">Posts</span>
+                  <span className="profile-nav-item selected">Posts</span>
                   <span className="profile-nav-item">About</span>
                   <span className="profile-nav-item">Friends</span>
                   <span className="profile-nav-item">Photos</span>
                 </div>
               </div>
+              <div className="posts-list">
+                {isMobile && <AboutMe user={user} />}
+                <Posts
+                  posts={userPosts}
+                  user={user}
+                  cls="profile-posts-container"
+                />
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

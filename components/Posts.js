@@ -6,9 +6,10 @@ import { useState, useEffect } from "react";
 import monthsArray from "../utils/monthsArray";
 import CreateComment from "../components/CreateComment";
 import Post from "./Post";
-const Posts = ({ posts, user }) => {
+const Posts = ({ posts, user, cls }) => {
+  if (!cls) cls = "";
   return (
-    <div className="posts-container">
+    <div className={`posts-container ${cls}`}>
       {posts &&
         posts.map((post) => {
           return <Post key={post._id} post={post} posts={posts} user={user} />;
