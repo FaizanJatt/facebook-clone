@@ -163,9 +163,8 @@ input {
 .register-input {
   height: 40px;
   padding: 4px 8px;
-}
-.register-input {
   border-color: #9f9595;
+  width: 100%;
 }
 
 .register-name {
