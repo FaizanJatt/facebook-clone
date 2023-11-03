@@ -107,7 +107,7 @@ export default function Register({ toggleModal }) {
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
       height: "fit-content",
-      backgroundImage: "linear-gradient(45deg, #f0f2f5, #ffeff1)",
+      backgroundImage: "linear-gradient(0, white, #ffeff1)",
     },
   };
   function closeModal() {
