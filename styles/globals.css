@@ -164,6 +164,10 @@ input {
   height: 40px;
   padding: 4px 8px;
 }
+.register-input {
+  border-color: #9f9595;
+}
+
 .register-name {
   display: flex;
   gap: 5px;

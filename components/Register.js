@@ -44,16 +44,7 @@ export default function Register({ toggleModal }) {
     let currYear = new Date().getFullYear();
     let registeredYear = new Date(registerInfo.dob).getFullYear();
     let isAdult = currYear - registeredYear > 8 ? true : false;
-    if (!isAdult) {
-      e.preventDefault();
-      setRegisterInfoErrorsList((prev) => {
-        return {
-          ...prev,
-          dob: true,
-        };
-      });
-      return;
-    }
+
     setIsLoading(true);
     e.preventDefault();
     const keysOfRegisterInfo = Object.keys(registerInfo);
@@ -71,6 +62,16 @@ export default function Register({ toggleModal }) {
       });
     });
     if (Object.keys(errs).length === 0) {
+      if (!isAdult) {
+        e.preventDefault();
+        setRegisterInfoErrorsList((prev) => {
+          return {
+            ...prev,
+            dob: true,
+          };
+        });
+        return;
+      }
       RegisterUser();
     } else {
       setIsLoading(false);
@@ -106,6 +107,7 @@ export default function Register({ toggleModal }) {
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
       height: "fit-content",
+      backgroundImage: "linear-gradient(45deg, #f0f2f5, #ffeff1)",
     },
   };
   function closeModal() {
