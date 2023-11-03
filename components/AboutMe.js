@@ -1,7 +1,6 @@
 function AboutMe({ user }) {
   let Dob = new Date(user.dob);
   let r = new Date(user.registrationDate);
-  console.log(r);
   let dob = {
     day: Dob.getDate() > 9 ? Dob.getDate() : `0${Dob.getDate()}`,
     date: Dob.getMonth() > 8 ? Dob.getMonth() + 1 : `0${Dob.getMonth() + 1}`,

@@ -218,7 +218,7 @@ const Post = ({ posts, post, user }) => {
     }
   };
   return (
-    <div className="post-cont" key={post._id}>
+    <div className="post-cont profile-post-container" key={post._id}>
       <div className="post-main">
         <div className="post-user">
           <img

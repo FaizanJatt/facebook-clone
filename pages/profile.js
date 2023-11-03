@@ -13,22 +13,22 @@ import Posts from "../components/Posts";
 import AboutMe from "../components/AboutMe";
 const Profile = ({ user, posts, currentCover, covers }) => {
   let userPosts = posts.filter((post) => post.author._id == user._id);
+  let userHasPosts = userPosts.length > 0;
 
   const [deviceWidth, setDeviceWidth] = useState("");
-  const [deviceHeight, setDeviceHeight] = useState("");
+  // const [deviceHeight, setDeviceHeight] = useState("");
   useEffect(() => {
     function resizeHandler() {
       const width = window.innerWidth;
       setDeviceWidth(width);
 
-      const height = window.innerHeight;
-      setDeviceHeight(height);
+      // const height = window.innerHeight;
+      // setDeviceHeight(height);
     }
     window.addEventListener("resize", resizeHandler);
-  }, [deviceWidth, deviceHeight]);
+  }, [deviceWidth]);
 
-  console.log(deviceWidth, deviceHeight);
-  let isMobile = deviceWidth > 800 ? true : false;
+  let isMobile = deviceWidth < 800 ? true : false;
   const router = useRouter();
 
   const [readerCoverImg, setReaderCoverImg] = useState();
@@ -366,12 +366,17 @@ const Profile = ({ user, posts, currentCover, covers }) => {
                   <span className="profile-nav-item">Photos</span>
                 </div>
               </div>
-              <div className="posts-list">
-                {isMobile && <AboutMe user={user} />}
+              <div
+                className={`posts-list ${
+                  isMobile ? "is-mobile" : "not-mobile"
+                }`}
+              >
+                {<AboutMe user={user} />}
                 <Posts
                   posts={userPosts}
                   user={user}
                   cls="profile-posts-container"
+                  hasNoPosts={!userHasPosts}
                 />
               </div>
             </div>

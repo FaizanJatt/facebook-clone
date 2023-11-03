@@ -1,13 +1,16 @@
 import React from "react";
-import Head from "next/head";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
-import monthsArray from "../utils/monthsArray";
-import CreateComment from "../components/CreateComment";
+
 import Post from "./Post";
-const Posts = ({ posts, user, cls }) => {
+const Posts = ({ posts, user, cls, hasNoPosts }) => {
   if (!cls) cls = "";
+  if (hasNoPosts) {
+    return (
+      <div className="no-posts-container">
+        <div>You have no posts Yet.</div>
+        <div>Create one to get started!</div>
+      </div>
+    );
+  }
   return (
     <div className={`posts-container ${cls}`}>
       {posts &&

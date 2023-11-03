@@ -824,7 +824,6 @@ hr {
   height: inherit;
 }
 .about-me {
-  display: none;
   background-color: white;
   padding: 20px;
 }
@@ -894,4 +893,30 @@ hr {
   .top--h1 {
     font-size: 40px;
   }
+}
+
+.is-mobile {
+  flex-direction: column;
+}
+.is-mobile > .about-me {
+  width: 400px;
+  margin-top: 12px;
+}
+.not-mobile > .no-posts-container {
+  /* background-color: red; */
+  margin-left: 15px;
+  margin-top: 15px;
+  height: 150px;
+  border-radius: 15;
+  /* width: 400px; */
+}
+
+.no-posts-container {
+  background-color: white;
+  margin: 6px 0px 6px 0px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }

@@ -9,21 +9,11 @@ import Sidebar from "../components/Sidebar";
 import CreatePost from "../components/CreatePost";
 import Posts from "../components/Posts";
 export default function Home({ user, posts }) {
-  // const [deviceWidth, setDeviceWidth] = useState("");
-  // const [deviceHeight, setDeviceHeight] = useState("");
-  // useEffect(() => {
-  //   const width = window.innerWidth;
-  //   setDeviceWidth(width);
-
-  //   const height = window.innerHeight;
-  //   setDeviceHeight(height);
-  // }, []);
   const session = useSession();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const togglePostModal = () => {
     setModalIsOpen((prev) => !prev);
   };
-  console.log(session);
 
   const router = useRouter();
   if (session.status == "loading") {
@@ -34,10 +24,7 @@ export default function Home({ user, posts }) {
     router.push("/auth/signin");
   } else if (session.status == "authenticated") {
     return (
-      <div
-        className="homepage"
-        // style={{ width: deviceWidth, height: deviceHeight }}
-      >
+      <div className="homepage">
         <Head>
           <title>Facebook clone</title>
         </Head>
@@ -97,6 +84,9 @@ export async function getServerSideProps(context) {
     const posts = await getPosts.json();
     const postsData = posts.data;
 
+    postsData.sort(
+      (a, b) => new Date(b.postDate).getTime() - new Date(a.postDate).getTime()
+    );
     return {
       props: {
         user: res,
